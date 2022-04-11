@@ -1,5 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
+function skuValidator(control: FormControl): { [s: string]: boolean } {
+  if (!control.value.match(/^123/)) {
+    return { invnulidSku: true };
+  } else return {};
+}
 
 @Component({
   selector: 'app-demo-form-sku-with-builder',
@@ -11,7 +22,7 @@ export class DemoFormSkuWithBuilderComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.myForm = fb.group({
-      sku: ['ABC123']
+      sku: ['', Validators.compose([Validators.required, skuValidator])]
     });
   }
 
