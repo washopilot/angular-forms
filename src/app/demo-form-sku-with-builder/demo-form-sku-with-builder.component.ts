@@ -1,40 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-
-function skuValidator(control: FormControl): { [s: string]: boolean } {
-  if (!control.value.match(/^123/)) {
-    return { invnulidSku: true };
-  } else return {};
-}
+import { Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-demo-form-sku-with-builder',
-  templateUrl: './demo-form-sku-with-builder.component.html',
-  styles: []
+  selector: 'app-demo-form-ng-model',
+  templateUrl: './demo-form-sku-with-builder.component.html'
 })
-export class DemoFormSkuWithBuilderComponent implements OnInit {
-  myForm: FormGroup;
+export class DemoFormNgModelComponent {
+  productName: string;
 
-  constructor(fb: FormBuilder) {
-    this.myForm = fb.group({
-      sku: ['', Validators.compose([Validators.required, skuValidator])]
-    });
-
-    this.myForm.controls['sku'].valueChanges.subscribe((value: string) => {
-      console.log('sku changed to: ', value);
-    });
-
-    this.myForm.valueChanges.subscribe((value: string) => {
-      console.log('form changed to: ', value);
-    });
+  constructor() {
+    this.productName = 'ng-book: The Complete Guide to Angular';
   }
-
-  ngOnInit(): void {}
 
   onSubmit(value: string): void {
     console.log('you submitted value: ', value);
