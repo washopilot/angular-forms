@@ -24,6 +24,14 @@ export class DemoFormSkuWithBuilderComponent implements OnInit {
     this.myForm = fb.group({
       sku: ['', Validators.compose([Validators.required, skuValidator])]
     });
+
+    this.myForm.controls['sku'].valueChanges.subscribe((value: string) => {
+      console.log('sku changed to: ', value);
+    });
+
+    this.myForm.valueChanges.subscribe((value: string) => {
+      console.log('form changed to: ', value);
+    });
   }
 
   ngOnInit(): void {}
